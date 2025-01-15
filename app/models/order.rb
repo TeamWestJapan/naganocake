@@ -6,4 +6,6 @@ class Order < ApplicationRecord
     validates: total_payment, presence: true
     validates: payment_method, presence: true
     validates: status, presence: true
+    belongs_to: customer
+    has_many: order_details, dependent: :destroy
 end
