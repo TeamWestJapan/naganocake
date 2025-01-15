@@ -1,6 +1,6 @@
 <h2>新規会員登録</h2>
 
-<%= form_with model: @customer, url: customer_registration_path, method: :post do |f| %>
+<%= form_with model: @customer, url: customer_registration_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
@@ -60,4 +60,4 @@
 <% end %>
 
 <h2>既に登録済みの方</h2>
-<%= render "public/shared/links" %>
+<%= render "public/shared/links" %>からログインしてください。
