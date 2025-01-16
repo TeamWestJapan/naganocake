@@ -1,0 +1,32 @@
+<div class='container px-5 px-sm-0'>
+	<div class='row'>
+	  <div class='col-md-3'>
+      <p>注文情報確認</p>
+
+      <%= form_with model: @order do |f| %>
+        <table class='table'>
+          <th>
+            <td>商品名</td>
+            <td>単価(税込)</td>
+            <td>数量</td>
+            <td>小計</td>
+          </th>
+          <th>
+            <td>送料</td>
+            <td>商品合計</td>
+            <td>請求金額</td>
+          </th>
+        </table>
+
+
+        <p>支払方法</p>
+          <%= @order.payment_method %>
+        <p>お届け先</p>
+          <%= @order.address %>
+
+        <%= f.submit '注文を確定する' %>
+        <% end %>
+
+    </div>
+	</div>
+</div>
