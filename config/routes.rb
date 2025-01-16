@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   get '/homes/about' => 'public/homes#about', as: 'about'
 
   get "/customers/my_page" => "public/customers#show", as: "my_page"
-  get "/customers/information/edit" => "puclic/customers#edit", as: "info_edit"
+  get "/customers/information/edit" => "public/customers#edit", as: "info_edit"
   patch "/customers/information" => "public/customers#update", as: "info_update"
-  get "/customers/unsubscribe" => "pulic/customers#unsubscribe", as: "unsubscribe"
+  get "/customers/unsubscribe" => "public/customers#unsubscribe", as: "unsubscribe"
   patch "/customers/withdraw" => "public/customers#withdraw", as: "withdraw"
 
   scope module: :public do
