@@ -20,18 +20,19 @@
             <th>宛名</th>
             <th></th>
         </tr>
-    </thead>
-    <% @addresses.each do |address| %>
-        <tbody>
+    </thead> 
+    <tbody>
+        <% @addresses.each do |address| %>
             <tr>
                 <th><%= address.postal_code %></th>
                 <th><%= address.address %></th>
                 <th><%= address.name %></th>
                 <th>
-                    <%= link_to "編集する", address_path(address) %>
+                    <%= link_to "編集する", edit_address_path(address) %>
                     <%= link_to "削除する", address_path(address), method: :delete %>
                 </th>
             </tr>
-        </tbody>
-    <% end %>
+        <% end %>
+    </tbody>
+    
 </table>
