@@ -1,5 +1,5 @@
 class Public::OrdersController < ApplicationController
-  before_action :authenticate_customer!, only: [:new, :create]
+  before_action :authenticate_customer!, only: [:new, :index, :create]
 
   def new
     @order = Order.new
@@ -13,6 +13,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = current_customer.orders.order(created_at: :desc)
   end
 
   def show
@@ -37,12 +38,12 @@ class Public::OrdersController < ApplicationController
       @order.name = params[:order][:shipping_name]
     end
     @order.save
-      redirect_to confirm_orders_path
+      redirect_to thanks_orders_path
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :address)
+    params.require(:order).permit(:payment_method, :address, :postal_code, :name, :shipping_cost, :total_payment)
   end
 end

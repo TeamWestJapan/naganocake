@@ -1,13 +1,11 @@
 <h1>注文情報入力</h1>
 
 <%= form_with model: @order, url: confirm_orders_path,local:true do |f| %>
-  <p>支払方法</p>
     <div>
       <%= f.label :payment_method, "支払方法" %><br>
       <%= f.radio_button :payment_method, "credit_card" %>クレジットカード<br>
       <%= f.radio_button :payment_method, "bank_transfer" %>銀行振込
     </div>
-  <p>お届け先</p>
   <%= f.label :address, "お届け先" %><br>
   <%= f.radio_button :address, "own_address", checked: (@order.address == 'own_address') %> ご自身の住所<br>
   <%= f.radio_button :address, "saved_address", checked: (@order.address == 'saved_address') %> 登録済み住所から選択<br>

@@ -1,0 +1,50 @@
+<h1>注文履歴詳細</h1>
+
+<table class="table">
+  <tr>
+    <th>注文番号</th>
+    <td><%= @order.id %></td>
+  </tr>
+  <tr>
+    <th>注文日</th>
+    <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+  </tr>
+  <tr>
+    <th>支払方法</th>
+    <td><%= @order.payment_method %></td>
+  </tr>
+  <tr>
+    <th>配送先</th>
+    <td><%= @order.address %></td>
+  </tr>
+  <tr>
+    <th>合計金額</th>
+    <td><%= number_to_currency(@order.total_payment) %></td>
+  </tr>
+  <tr>
+    <th>ステータス</th>
+    <td><%= @order.status %></td>
+  </tr>
+</table>
+
+<h3>注文商品</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_details.each do |order_detail| %>
+      <tr>
+        <td><%= order_detail.item.name %></td>
+        <td><%= number_to_currency(order_detail.price) %></td>
+        <td><%= order_detail.quantity %></td>
+        <td><%= number_to_currency(order_detail.total_price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
