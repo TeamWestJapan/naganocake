@@ -1,8 +1,9 @@
 <h1>商品一覧</h1>
+<p>(全x件)</p>
 
 <% @items.each do |item| %>
   <%= image_tag item.image %>
-  <%= link_to admin_item_path(item.id) do %>
+  <%= link_to item_path(item.id) do %>
     <%= item.name %>
   <% end %>
   ¥<%= item.price %>
