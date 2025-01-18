@@ -60,6 +60,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys:[:first_name], keys:[:last_name], keys:[:first_name_kana], keys:[:last_name_kana], keys:[:postal_code], keys:[:address], keys:[:telephone_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys:[:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address, :telephone_number])
   end
 end

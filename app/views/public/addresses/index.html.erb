@@ -1,2 +1,38 @@
-<h1>Public::Addresses#index</h1>
-<p>Find me in app/views/public/addresses/index.html.erb</p>
+<h1>配送先登録/一覧</h1>
+<%= form_with model: @address, url: addresses_path, method: :post do |f| %>
+    <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+    <%= f.text_field :postal_code %></br>
+
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address %></br>
+
+    <%= f.label :name, "宛名" %>
+    <%= f.text_field :name %>
+
+    <%= f.submit "新規登録" %>
+<% end %>
+
+<table>
+    <thead>
+        <tr>
+            <th>郵便番号</th>
+            <th>住所</th>
+            <th>宛名</th>
+            <th></th>
+        </tr>
+    </thead> 
+    <tbody>
+        <% @addresses.each do |address| %>
+            <tr>
+                <th><%= address.postal_code %></th>
+                <th><%= address.address %></th>
+                <th><%= address.name %></th>
+                <th>
+                    <%= link_to "編集する", edit_address_path(address) %>
+                    <%= link_to "削除する", address_path(address), method: :delete %>  
+                </th>
+            </tr>
+        <% end %>
+    </tbody>
+    
+</table>
