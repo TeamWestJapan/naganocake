@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2025_01_16_065845) do
     t.string "postal_code"
     t.string "address"
     t.string "telephone_number"
-    t.boolean "is_active", null:false, default: true
+    t.boolean "is_active", default: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
