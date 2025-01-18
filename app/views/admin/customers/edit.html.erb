@@ -30,6 +30,11 @@
         <tr>
             <th>会員ステータス</th>
             <th>
+                <%= f.radio_button :is_active, true %>
+                <%= f.label :is_active, "有効" %>
+
+                <%= f.radio_button :is_active, false %>
+                <%= f.label :is_active, "無効" %>
             </th>
         </tr>
         <tr>

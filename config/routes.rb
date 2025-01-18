@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'seaches/seach'
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -11,11 +12,11 @@ Rails.application.routes.draw do
   root to: "public/homes#top"
   get '/homes/about' => 'public/homes#about', as: 'about'
 
-  get "/customers/my_page" => "public/customers#show", as: "my_page"
-  get "/customers/information/edit" => "public/customers#edit", as: "info_edit"
-  patch "/customers/information" => "public/customers#update", as: "info_update"
-  get "/customers/unsubscribe" => "public/customers#unsubscribe", as: "unsubscribe"
-  patch "/customers/withdraw" => "public/customers#withdraw", as: "withdraw"
+  get "customers/my_page" => "public/customers#show", as: "my_page"
+  get "customers/information/edit" => "public/customers#edit", as: "info_edit"
+  patch "customers/information" => "public/customers#update", as: "info_update"
+  get "customers/unsubscribe" => "public/customers#unsubscribe", as: "unsubscribe"
+  patch "customers/withdraw" => "public/customers#withdraw", as: "withdraw"
 
   scope module: :public do
     resources :items, only: [:index, :show]
