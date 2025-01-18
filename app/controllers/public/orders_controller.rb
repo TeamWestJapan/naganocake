@@ -1,5 +1,5 @@
 class Public::OrdersController < ApplicationController
-  before_action :authenticate_customer!, only: [:new, :index, :create]
+  before_action :authenticate_customer!, only: [:new, :index, :confirm, :show, :thanks, :create]
 
   def new
     @order = Order.new
@@ -22,10 +22,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    @address = Address.find(params[:order][:address_id])
-    @order.postal_code = @address.postal_code
-    @order.address = @address.address
-    @order.name = @address.name
+    @shipping_cost = 800
   end
 
   def create

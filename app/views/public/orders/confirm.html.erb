@@ -3,21 +3,22 @@
     <div class='col-md-3'>
       <p>注文情報確認</p>
 
-      <%= form_with model: @order do |f| %>
-        <table class='table'>
-          <thead>
+        <table class='item_table'>
+          <tr>
+            <td>商品名</td>
+            <td>単価(税込)</td>
+            <td>数量</td>
+            <td>小計</td>
+          </tr>
+          <%= form_with model: @order do |f| %>
+        </table>
+        <table class='cost_table'>
             <tr>
-              <th>商品名</th>
-              <th>単価(税込)</th>
-              <th>数量</th>
-              <th>小計</th>
+              <td>送料</td>
+              <td><%= @shippng_cost %></td>
+              <td>商品合計</td>
+              <td>請求金額</td>
             </tr>
-            <tr>
-              <th>送料</th>
-              <th>商品合計</th>
-              <th>請求金額</th>
-            </tr>
-          </thead>
         </table>
 
         
@@ -25,7 +26,7 @@
           <%= @order.payment_method_i18n %>
         <p>お届け先</p>
           <%= @order.address %>
-
+        <br>
         <%= f.submit '注文を確定する' %>
         <% end %>
 
