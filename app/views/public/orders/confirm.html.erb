@@ -16,8 +16,8 @@
             <tr>
               <td>送料</td>
               <td><%= @shippng_cost %></td>
-              <td>商品合計</td>
-              <td>請求金額</td>
+              <td>商品合計<%= @cart_items_price %></td>
+              <td>請求金額<%= @total_price %></td>
             </tr>
         </table>
 
@@ -25,8 +25,15 @@
         <p>支払方法</p>
           <%= @order.payment_method_i18n %>
         <p>お届け先</p>
-          <%= @order.address %>
-        <br>
+        <% if @order_address %>
+          <p><%= @order_address %></p>  <!-- 自身の住所 -->
+        <% elsif @selected_address %>
+          <p><%= @selected_address %></p>  <!-- 保存した住所 -->
+        <% elsif @new_address %>
+          <%= @new_postal_code %>
+          <%= @new_address %>
+          <%= @new_name %>
+        <% end %>
         <%= f.submit '注文を確定する' %>
         <% end %>
 
