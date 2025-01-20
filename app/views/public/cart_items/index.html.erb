@@ -1,4 +1,5 @@
 <h1>ショッピングカート</h1>
+<div>カートを空にする機能</div>
 <table>
   <thead>
     <tr>
@@ -9,12 +10,14 @@
     </tr>
   </thead>
   <tbody>
+  <% @cart_items.each do |cart_item| %>
     <tr>
-      <td>item.name</td>
-      <td>item.price</td>
-      <td>item.amount</td>
-      <td>total</td>
+      <td>cart_item.item.name</td>
+      <td><%= (cart_item.item.price * 1.1).floor %></td>
+      <td>cart_item.amount</td>
+      <td><%= (cart_item.item.price * 1.1).floor * cart_item.amount %></td>
       <td>削除する</td>
     </tr>
+  <% end %>
   </tbody>
 </table>
