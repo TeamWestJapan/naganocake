@@ -1,8 +1,64 @@
 <h2>注文履歴詳細</h2>
 
-<%= @order.each do |order| %>
-          <td>
-            <%= form_with model: order, url: admin_order_path(order), method: :patch do |f| %>
-            <%= f.serect :status, Order.statuses, class: "status_serect" %>
-            <%= f.submit "">
-          </td>
+<table>
+  <tr>
+    <th>購入者</th>
+    <th>
+      <%= link_to admin_customer_path(@order) do %>
+        <%= @customer.name %>
+      <% end %>
+    </th>
+  </tr>
+  <tr>
+    <th>注文日</th>
+    <th><%= @order.created_at.strftime('%Y/%m/%d') %></th>
+  </tr>
+  <tr>
+    <th>配送先</th>
+    <th>
+      〒<%= @order.postal.code %><%= @order.address %></br>
+      <%= @order.name %>
+    </th>
+  </tr>
+  <tr>
+    <th>支払方法</th>
+    <th><%= @order.payment_method %></th>
+  </tr>
+  <tr>
+    <th>注文ステータス</th>
+    <th>
+      <%= form_with model: @order, url: admin_order_path(@order), method: :patch do |f| %>
+        <%= f.select :order_status, option_for_select(["入金待ち", "入金確認", "製作中", "発送準備", "発送済み"]) %>
+        <%= f.submin "更新" %>
+      <% end %>
+    </th>
+  </tr>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>製作ステータス</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><%= @items.items.name %></th>
+      <th><%= @items.items.price  %></th>
+      <th><%= @items.amount</th>
+      <th><%= @items.items.price * @items.amount %></th>
+      <%= form_with model: [@order, @order_detail], url: admin_order_order_detail_path, method: :patch do |f| %>
+        <th>
+          <%= f.select :detail_status, option_for_select(["製作不可", "製作待ち", "製作中", "製作完了"]) %>
+        </th>
+        <th><%= f.submit "更新" %></th>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
