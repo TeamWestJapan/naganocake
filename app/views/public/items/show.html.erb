@@ -1,5 +1,8 @@
-<%= image_tag @item.image %>
-<h2><%= @item.name %> <br /></h2>
+<% if @item.image.attached? %>
+  <%= image_tag @item.image %>
+<% else %>
+  <%= image_tag 'no_image' %>
+<% end %><h2><%= @item.name %> <br /></h2>
 <%= @item.introduction %> <br />
 <font size="5">¥<%= (@item.price*1.1).round %></font> <font size="2">（税込）</font>
 <%= form_with model: @cart_item do |f| %>
