@@ -57,6 +57,12 @@ class Public::OrdersController < ApplicationController
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
+    when 'saved_address'
+      Addresses.find(params[:order][:saved_address_id])
+      selected = Address.find(params[:order][:saved_address_id])
+      @order.postal_code = selected.postal_code
+      @order.address = selected_address
+      @order.name = selected.name
     when 'new_address'
       @order.postal_code = params[:order][:shipping_postal_code]
       @order.address = params[:order][:shipping_address]

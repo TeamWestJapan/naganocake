@@ -3,25 +3,29 @@
     <div class='col-md-3'>
       <p>注文情報確認</p>
 
-        <table class='item_table'>
+      <table class='item_table'>
+        <tr>
+          <td>商品名</td>
+          <td>単価(税込)</td>
+          <td>数量</td>
+          <td>小計</td>
+        </tr>
+        <% @cart_items.each do |cart_item| %>
           <tr>
-            <td>商品名</td>
-            <td>単価(税込)</td>
-            <td>数量</td>
-            <td>小計</td>
+            <td><%= cart_item.item.name %></td>
+            <td><%= cart_item.item.price %></td>
+            <td><%= cart_item.item.amount %></td>
+            <td><%= cart_item.total %></td>
           </tr>
-          <%= form_with model: @order do |f| %>
-        </table>
-        <table class='cost_table'>
-            <tr>
-              <td>送料</td>
-              <td><%= @shippng_cost %></td>
-              <td>商品合計<%= @cart_items_price %></td>
-              <td>請求金額<%= @total_price %></td>
-            </tr>
-        </table>
-
-        
+        <% end %>
+          <tr>
+            <td>送料</td>
+            <td><%= @shipping_cost %></td>
+            <td>商品合計<%= @cart_items_price %></td>
+            <td>請求金額<%= @total_price %></td>
+          </tr>
+    </table>
+         <%= form_with model: @order do |f| %>
         <p>支払方法</p>
           <%= @order.payment_method_i18n %>
         <p>お届け先</p>
