@@ -4,6 +4,13 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
+      status:
+        waiting_for_payment: "入金待ち"
+        payment_confirm: "入金確認"
+        in_production: "製作中"
+        preparing_for_shipping: "発送準備"
+        shipping: "発送済み"
+      
   errors:
     messages:
       record_invalid: 'バリデーションに失敗しました: %{errors}'
