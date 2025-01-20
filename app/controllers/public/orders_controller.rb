@@ -13,7 +13,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_customer.orders.order(created_at: :desc)
+    @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
   end
 
   def show
@@ -26,10 +26,10 @@ class Public::OrdersController < ApplicationController
     @shipping_cost = 800
     ary = []
     @cart_items.each do |cart_item|
-      ary <<cart_item.item.price*cart_item.quantity
+      ary <<cart_item.item.price*cart_item.amount
     end
     @cart_items_price = ary.sum
-    @total_price = @shipping_fee + @cart_items_price
+    @total_price = @shipping_cost + @cart_items_price
     @address_type = params[:order][:address_type]
     @address_type = params[:order][:address_type]
     case @address_type
@@ -61,7 +61,7 @@ class Public::OrdersController < ApplicationController
       @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
     when 'saved_address'
       Addresses.find(params[:order][:saved_address_id])
-      selected = Address.find(params[:order][:saved_address_id])
+      selected = Addresses.find(params[:order][:saved_address_id])
       @order.postal_code = selected.postal_code
       @order.address = selected_address
       @order.name = selected.name
@@ -70,13 +70,17 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:shipping_address]
       @order.name = params[:order][:shipping_name]
     end
-    @order.save
+    if @order.save!
+
+      end
+      @cart_items = current_customer.cart_items
+      @cart_items.destroy_all
       redirect_to thanks_orders_path
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :address, :postal_code, :name, :shipping_cost, :total_payment)
+    params.require(:order).permit(:payment_method, :address, :postal_code, :name, :shipping_cost, :total_payment, :status)
   end
 end
