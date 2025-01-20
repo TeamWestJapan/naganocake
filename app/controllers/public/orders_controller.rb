@@ -24,11 +24,13 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @shipping_cost = 800
-    #ary = []
-    #@cart_items.each do |cart_item|
-      #ary <<cart_item.item.price*cart_item.quantity
-    #end
-    #@cart_items_price = ary.sum
+    ary = []
+    @cart_items.each do |cart_item|
+      ary <<cart_item.item.price*cart_item.quantity
+    end
+    @cart_items_price = ary.sum
+    @total_price = @shipping_fee + @cart_items_price
+    @address_type = params[:order][:address_type]
     @address_type = params[:order][:address_type]
     case @address_type
     when "own_address"  # 自身の住所を使う場合
