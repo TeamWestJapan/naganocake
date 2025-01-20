@@ -2,7 +2,11 @@
 <p>(全<%= @items.count %>件)</p>
 
 <% @items.each do |item| %>
-  <%= image_tag item.image %>
+  <% if item.image.attached? %>
+    <%= image_tag item.image %>
+  <% else %>
+    <%= image_tag 'no_image' %>
+  <% end %>
   <%= link_to item_path(item.id) do %>
     <%= item.name %>
   <% end %>
