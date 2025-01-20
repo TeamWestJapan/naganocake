@@ -1,5 +1,9 @@
 <h1>商品詳細</h1>
-<%= image_tag @item.image %>
+<% if @item.image.attached? %>
+  <%= image_tag @item.image %>
+<% else %>
+  <%= image_tag 'no_image' %>
+<% end %>
 <table>
   <tr><th>商品名</th> <td><%= @item.name %></td></tr>
   <tr><th>商品説明</th> <td><%= @item.introduction %></td></tr>
