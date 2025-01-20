@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'seaches/seach'
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -44,6 +42,7 @@ Rails.application.routes.draw do
   end
   
   get "admin" => "admin/homes#top"
+  get 'searches/search'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
