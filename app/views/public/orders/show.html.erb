@@ -1,17 +1,14 @@
 <h1>注文履歴詳細</h1>
 
-<table class="table">
-  <tr>
-    <th>注文番号</th>
-    <td><%= @order.id %></td>
-  </tr>
+<h3>注文情報</h3>
+<table class="order table">
   <tr>
     <th>注文日</th>
     <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
   </tr>
   <tr>
     <th>支払方法</th>
-    <td><%= @order.payment_method %></td>
+    <td><%= @order.payment_method_i18n %></td>
   </tr>
   <tr>
     <th>配送先</th>
@@ -19,16 +16,33 @@
   </tr>
   <tr>
     <th>合計金額</th>
-    <td><%= number_to_currency(@order.total_payment) %></td>
+    <td><%= @order.total_payment %></td>
   </tr>
   <tr>
     <th>ステータス</th>
-    <td><%= @order.status %></td>
+    <td><%= @order.status_i18n %></td>
   </tr>
 </table>
 
+<h3>請求情報</h3>
+<tabele class="payment table">
+  <tr>
+    <td>商品合計</td>
+    <td><%= @order.total_payment %></td>
+  </tr>
+  <tr>
+    <td>配送料</td>
+    <td><%= @order.shipping_cost %></td>
+  </tr>
+  <tr>
+    <td>ご請求金額</td>
+    <td><%= @order.total_payment + @order.shipping_cost %></td>
+  </tr>
+</table>
+
+
 <h3>注文商品</h3>
-<table class="table">
+<table class="item table">
   <thead>
     <tr>
       <th>商品名</th>

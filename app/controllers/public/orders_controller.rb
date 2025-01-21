@@ -18,6 +18,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order_details= OrderDetail.where(order_id: @order.id)
   end
 
   def confirm
@@ -53,7 +54,22 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @cart_items = CartItem.where(customer_id: current_customer.id)
     @order.customer = current_customer
+    @order.shipping_cost = 800
+    ary = []
+    @cart_items.each do |cart_item|
+      ary <<cart_item.item.price*cart_item.amount
+    end
+    @cart_items_price = ary.sum
+    @order.total_payment = @order.shipping_cost + @cart_items_price
+    @order.payment_method = params[:order][:payment_method]
+    if @order.payment_method == "credit_card"
+      @order.status = 1
+    else
+      @order.status = 0
+    end
+
     case params[:order][:shipping_address_type]
     when 'own_address'
       @order.postal_code = current_customer.postal_code
@@ -70,12 +86,20 @@ class Public::OrdersController < ApplicationController
       @order.address = params[:order][:shipping_address]
       @order.name = params[:order][:shipping_name]
     end
-    if @order.save!
-
+    if @order.save
+      if @order.status == 0
+        @cart_items.each do |cart_item|
+          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 0)
+        end
+      else
+        @cart_items.each do |cart_item|
+          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 1)
+        end
       end
       @cart_items = current_customer.cart_items
       @cart_items.destroy_all
       redirect_to thanks_orders_path
+    end
   end
 
   private
