@@ -56,8 +56,8 @@
       <tr>
         <td><%= order_detail.item.name %></td>
         <td><%= number_to_currency(order_detail.price) %></td>
-        <td><%= order_detail.quantity %></td>
-        <td><%= number_to_currency(order_detail.total_price) %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= number_to_currency(order_detail.order.total_payment) %></td>
       </tr>
     <% end %>
   </tbody>
