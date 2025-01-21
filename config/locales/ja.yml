@@ -10,6 +10,12 @@ ja:
         in_production: "製作中"
         preparing_for_shipping: "発送準備"
         shipping: "発送済み"
+    order_detail:
+      making_status:
+        cannot_produce: "製作不可"
+        waiting_for_production: "製作待ち"
+        in_production: "製作中"
+        produced: "製作完了"
       
   errors:
     messages:
