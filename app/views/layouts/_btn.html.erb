@@ -5,7 +5,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2  mb-lg-0">
         <% if customer_signed_in? %>
           <li class="nav-item">
             <%= link_to 'マイぺージ', my_page_path, class: 'btn btn-outline-dark' %>
@@ -50,8 +50,8 @@
           </li>
         <% end %>
       </ul>
+      <%= render "searches/search" %>
     </div>
-    <%= render "searches/search" %>
   </div>
 </nav>
 
