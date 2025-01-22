@@ -1,22 +1,45 @@
-<h1>top page<h1>
-<p>
-ようこそ、ながのCAKEへ！<br />
-このサイトは、ケーキ販売のECサイトになります。<br />
-会員でない方も商品の閲覧はできますが、<br />
-購入には会員登録が必要になります。
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-5">
+      <p>
+      ようこそ、ながのCAKEへ！<br />
+      このサイトは、ケーキ販売のECサイトになります。<br />
+      会員でない方も商品の閲覧はできますが、<br />
+      購入には会員登録が必要になります。
+      </p>
+    </div>
+    <div class="col-3"></div>
+  </div>
 
-<h1>新着商品</h1>
-<% @items.each do |item| %>
-  <% if item.image.attached? %>
-    <%= image_tag item.image %>
-  <% else %>
-    <%= image_tag 'no_image' %>
-  <% end %>
-  <%= link_to item_path(item.id) do %>
-    <%= item.name %>
-  <% end %>
-  ¥<%= item.price %>
-<% end %> <br />
+  <div class="row">
+    <div class="new items mt-5 mb-3">
+      <h2>
+        新着商品
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-3 text-center mb-4">
+        <% if item.image.attached? %>
+          <%= image_tag item.image, size: "150x150", class: "mb-2" %>
+        <% else %>
+          <%= image_tag 'no_image', size: "150x150", class: "mb-2" %>
+        <% end %>
+        <div class="item-name">
+          <%= link_to item_path(item.id) do %>
+            <%= item.name %>
+          <% end %>
+        </div>
+        <div class="item-price">
+          ¥<%= item.price %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
 
 <%= link_to "全ての商品を見る >", items_path %>
