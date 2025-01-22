@@ -6,11 +6,11 @@
     </tr>
     <tr>
         <th>氏名</th>
-        <th><%= @customer.last_name %> <%= @customer.first_name %></th>
+        <th><%= @customer.full_name %></th>
     </tr>
     <tr>
         <th>フリガナ</th>
-        <th><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></th>
+        <th><%= @customer.full_name_kana %></th>
     </tr>
     <tr>
         <th>郵便番号</th>
@@ -40,5 +40,5 @@
     </tr>
 </table>
 
-<%= link_to "編集する", edit_admin_customer_path(@customer) %>
-<%= link_to "注文履歴一覧を見る", admin_path %>
+<%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
+<%= link_to "注文履歴一覧を見る", admin_path, class: "btn btn-primary" %>
