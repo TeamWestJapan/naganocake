@@ -28,7 +28,7 @@
                 <th><%= address.address %></th>
                 <th><%= address.name %></th>
                 <th>
-                    <%= link_to "編集する", edit_address_path(address) %>
+                    <%= link_to "編集する", edit_address_path(address), class: "btn btn-success" %>
                     <%= link_to "削除する", address_path(address), method: :delete %>  
                 </th>
             </tr>
