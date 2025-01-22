@@ -3,10 +3,6 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @order.postal_code = current_customer.postal_code
-    @order.address = current_customer.address
-    @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
-    @addresses = current_customer.addresses
   end
 
   def thanks
@@ -32,73 +28,36 @@ class Public::OrdersController < ApplicationController
     @cart_items_price = ary.sum
     @total_price = @shipping_cost + @cart_items_price
     @address_type = params[:order][:address_type]
-    @address_type = params[:order][:address_type]
     case @address_type
-    when "own_address"  # 自身の住所を使う場合
-      @order_address = current_customer.postal_code + " " + current_customer.address + " " + current_customer.last_name + current_customer.first_name
-    when "saved_address"  # 保存済みの住所を使う場合
-      if params[:order][:saved_address_id].present?
-        selected = Address.find(params[:order][:saved_address_id])
-        @selected_address = selected.postal_code + " " + selected.address + " " + selected.name
+    when "own_address"
+      @order.postal_code = current_customer.postal_code 
+      @order.address = current_customer.address
+      @order.name = current_customer.first_name + current_customer.last_name
+    when "saved_address"
+      unless params[:order][:saved_address_id] == ""
+        @address = Address.find(params[:order][:saved_address_id])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
       else
-        render :new  # 保存済み住所が選択されていない場合は新規注文画面に戻す
+        render :new
       end
-    when "new_address"  # 新しい住所を使う場合
-      @new_postal_code = params[:order][:new_postal_code]
-      @new_address = params[:order][:new_address]
-      @new_name = params[:order][:new_name]
-    else
-      render :new 
     end
   end
 
   def create
     @order = Order.new(order_params)
-    @cart_items = CartItem.where(customer_id: current_customer.id)
-    @order.customer = current_customer
+    @order.customer_id = current_customer.id
+    @cart_items = current_customer.cart_items
     @order.shipping_cost = 800
-    ary = []
-    @cart_items.each do |cart_item|
-      ary <<cart_item.item.price*cart_item.amount
-    end
-    @cart_items_price = ary.sum
-    @order.total_payment = @order.shipping_cost + @cart_items_price
-    @order.payment_method = params[:order][:payment_method]
-    if @order.payment_method == "credit_card"
-      @order.status = 1
-    else
-      @order.status = 0
-    end
-
-    case params[:order][:shipping_address_type]
-    when 'own_address'
-      @order.postal_code = current_customer.postal_code
-      @order.address = current_customer.address
-      @order.name = "#{current_customer.last_name} #{current_customer.first_name}"
-    when 'saved_address'
-      Addresses.find(params[:order][:saved_address_id])
-      selected = Addresses.find(params[:order][:saved_address_id])
-      @order.postal_code = selected.postal_code
-      @order.address = selected_address
-      @order.name = selected.name
-    when 'new_address'
-      @order.postal_code = params[:order][:shipping_postal_code]
-      @order.address = params[:order][:shipping_address]
-      @order.name = params[:order][:shipping_name]
-    end
     if @order.save
-      if @order.status == 0
         @cart_items.each do |cart_item|
-          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 0)
+          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.with_tax_price, amount: cart_item.amount, making_status: 0)
         end
-      else
-        @cart_items.each do |cart_item|
-          OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 1)
-        end
-      end
-      @cart_items = current_customer.cart_items
       @cart_items.destroy_all
       redirect_to thanks_orders_path
+    else
+      render :new
     end
   end
 
