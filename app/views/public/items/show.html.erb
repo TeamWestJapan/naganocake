@@ -1,12 +1,35 @@
-<% if @item.image.attached? %>
-  <%= image_tag @item.image %>
-<% else %>
-  <%= image_tag 'no_image' %>
-<% end %><h2><%= @item.name %> <br /></h2>
-<%= @item.introduction %> <br />
-<font size="5">¥<%= @item.with_tax_price %></font> <font size="2">（税込）</font>
-<%= form_with model: @cart_item do |f| %>
-  <%= f.hidden_field :item_id, value: @item.id %>
-  <%= f.select :amount, *[1..10], {prompt: "個数選択"} %>
-  <%= f.submit "カートに入れる" %>
-<% end %>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-3">
+      <div class="list-group">
+        <p>ジャンル検索</p>
+        <% @genres.each do |genre| %>
+          <div class="list-group-item">
+            <%= genre.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-5">
+          <% if @item.image.attached? %>
+            <%= image_tag @item.image %>
+          <% else %>
+            <%= image_tag 'no_image' %>
+          <% end %>
+        </div>
+        <div class="col-7">
+          <h2 class="mb-2"><%= @item.name %></h2> <br />
+          <div class="mb-3"><%= @item.introduction %></div> <br />
+          <div class="mb-3"><font size="5">¥<%= @item.with_tax_price %></font> <font size="2">（税込）</font></div>
+          <%= form_with model: @cart_item do |f| %>
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.select :amount, *[1..10], {prompt: "個数選択"} %>
+            <%= f.submit "カートに入れる", class:"btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,45 +1,58 @@
 <div class="container">
   <div class="row">
-    <div class="col-4"></div>
-    <div class="col-5">
-      <p>
-      ようこそ、ながのCAKEへ！<br />
-      このサイトは、ケーキ販売のECサイトになります。<br />
-      会員でない方も商品の閲覧はできますが、<br />
-      購入には会員登録が必要になります。
-      </p>
-    </div>
-    <div class="col-3"></div>
-  </div>
-
-  <div class="row">
-    <div class="new items mt-5 mb-3">
-      <h2>
-        新着商品
-      </h2>
-    </div>
-  </div>
-
-  <div class="row">
-    <% @items.each do |item| %>
-      <div class="col-3 text-center mb-4">
-        <% if item.image.attached? %>
-          <%= image_tag item.image, size: "150x150", class: "mb-2" %>
-        <% else %>
-          <%= image_tag 'no_image', size: "150x150", class: "mb-2" %>
+    <div class="col-3">
+      <div class="list-group">
+        <p>ジャンル検索</p>
+        <% @genres.each do |genre| %>
+          <div class="list-group-item">
+            <%= genre.name %>
+          </div>
         <% end %>
-        <div class="item-name">
-          <%= link_to item_path(item.id) do %>
-            <%= item.name %>
-          <% end %>
-        </div>
-        <div class="item-price">
-          ¥<%= item.price %>
+      </div>
+    </div>
+
+    <div class="col-9">
+      <div class="card">
+        <%= image_tag 'nagano', size: "250x250", class: "card-img" %>
+        <div class="card-img-overlay d-flex justify-content-center align-items-center">
+          <p class="card-title bg-white" style="opacity: 70%;">
+          ようこそ、ながのCAKEへ！<br />
+          このサイトは、ケーキ販売のECサイトになります。<br />
+          会員でない方も商品の閲覧はできますが、<br />
+          購入には会員登録が必要になります。
+          </p>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
 
-</div>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-9">
+      <h2 class="row mt-5 mb-3">新着商品</h2>
+      <% @items.each do |item| %>
+        <div>
+          <% if item.image.attached? %>
+            <%= image_tag item.image, size: "150x150", class: "mb-2" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "150x150", class: "mb-2" %>
+          <% end %>
+          <div class="item-name">
+            <%= link_to item_path(item.id) do %>
+              <%= item.name %>
+            <% end %>
+          </div>
+          <div class="item-price">
+            ¥<%= item.price %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<%= link_to "全ての商品を見る >", items_path %>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"><%= link_to "全ての商品を見る >", items_path %></div>
+  </div>
+</div>
