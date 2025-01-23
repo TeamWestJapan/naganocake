@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class='col-md-12'>
-      <h3>注文履歴詳細</h3>
+    <div class='col-md-7'>
+      <h4>注文履歴詳細</h4>
       <table>
         <tr>
           <th>購入者</th>
@@ -38,6 +38,10 @@
           </th>
         </tr>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class='col-md-7'>
       <table class= "table">
         <thead>
           <tr>
@@ -59,26 +63,26 @@
             <td><%= order_detail.price * order_detail.amount %></td>
             <%= form_with model:[@order,order_detail], url: admin_order_order_detail_path(@order,order_detail), method: :patch do |f|%>
             <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map{|k| [t("enums.order_detail.making_status.#{k}"), k]} %></td>
-            <td><%= f.submit "更新" %></td>
+            <td><%= f.submit "更新", class: "btn btn-success" %></td>
             <% end %>
             </tr>
         <% end %>
         </tbody>
       </table>
-      <tabele class="table">
-      <tr>
-      <td>商品合計</td>
-      <td><%= @order.total_payment %></td>
-    </tr>
-    <tr>
-      <td>配送料</td>
-      <td><%= @order.shipping_cost %></td>
-    </tr>
-    <tr>
-      <td>ご請求金額</td>
-      <td><%= @order.total_payment + @order.shipping_cost %></td>
-    </tr>
-      </table>
+    </div>
+    <div class="col align-self-end">
+      <div class="d-flex justify-content-between w-100">
+        <span>商品合計</span>
+        <span class="ml-auto"><%= number_to_currency(@order.total_payment, delimiter: ',') %></span>
+      </div>
+      <div class="d-flex justify-content-between w-100">
+        <span>配送料</span>
+        <span class="ml-auto"><%= number_to_currency(@order.shipping_cost, delimiter: ',') %></span>
+      </div>
+      <div class="d-flex justify-content-between w-100">
+        <span>ご請求金額</span>
+        <span class="ml-auto"><%= number_to_currency(@order.total_payment + @order.shipping_cost, delimiter: ',') %></span>
+      </div>
     </div>
   </div>
 </div>
