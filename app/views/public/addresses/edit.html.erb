@@ -8,7 +8,7 @@
     </div>
     <%= form_with model: @address, url: address_path(@address), method: :patch do |f| %>
         <div class="row">
-            <table class="table">
+            <table class="table table-borderless">
                 <tr>
                     <th class="col-3"><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></th>
                     <td class="col-6"><%= f.text_field :postal_code %></td>
@@ -16,7 +16,7 @@
                 </tr>
                 <tr>
                     <th class="col-3"><%= f.label :address, "住所" %></th>
-                    <td class="col-6"><%= f.text_area :address %></td>
+                    <td class="col-6"><%= f.text_field :address %></td>
                     <td class="col"></td>
                 </tr>
                 <tr>
