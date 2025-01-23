@@ -3,12 +3,9 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order_detail = OrderDetail.find(@order.id)
+    @order_details = OrderDetail.where(order_id: @order.id)
   end
 
-  def index
-    @orders = current_customer.orders.order(created_at: :desc).page(params[:page]).per(10)
-  end
 
   def update
     @order = Order.find(params[:id])
