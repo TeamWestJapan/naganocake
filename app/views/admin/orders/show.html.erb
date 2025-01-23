@@ -44,7 +44,7 @@
     <div class='col-md-7'>
       <table class= "table">
         <thead>
-          <tr>
+          <tr class = "table-secondary">
             <br>
             <th>商品名</th>
             <th>単価(税込)</th>
@@ -71,7 +71,7 @@
       </table>
     </div>
     <div class="col align-self-end">
-      <div class="d-flex justify-content-between w-100">
+      <div class="d-flex justify-content">
         <span>商品合計</span>
         <span class="ml-auto"><%= number_to_currency(@order.total_payment, delimiter: ',') %></span>
       </div>

@@ -4,7 +4,7 @@
       <table class="table">
         <h2>注文履歴一覧　</h2>
           <thead>
-            <tr>
+            <tr class = "table-secondary">
               <th>購入日時</th>
               <th>購入者</th>
               <th>注文個数</th>
@@ -24,13 +24,7 @@
       </table>
       <div class= "row justify-content-center" >
         <div class= "pagination" >
-          <%= paginate @orders,
-          next_label: 'Next　&raquo;'.html_safe,
-          first_label: '<<First'.html_safe,
-          last_label: 'Last>>'.html_safe,
-          outer_window: 2,
-          inner_window: 2,
-          param_name: :page %>
+          <%= paginate @orders, theme: 'bootstrap-5'%>
         </div>
       </div>
     </div>

@@ -32,7 +32,7 @@ class Public::OrdersController < ApplicationController
     when "own_address"
       @order.postal_code = current_customer.postal_code 
       @order.address = current_customer.address
-      @order.name = current_customer.first_name + current_customer.last_name
+      @order.name = current_customer.last_name + current_customer.first_name
     when "saved_address"
       unless params[:order][:saved_address_id] == ""
         @address = Address.find(params[:order][:saved_address_id])
