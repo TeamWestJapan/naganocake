@@ -43,7 +43,7 @@
       </table>
     </div>
   </div>
-  <%= form_with model: @order do |f| %>
+  <%= form_with model: @order, url: orders_path, method: :post do |f| %>
   <div class='row'>
     <div class='col-1'>
       <p>支払方法</p>
