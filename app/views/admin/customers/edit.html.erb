@@ -1,45 +1,52 @@
-<h1><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</h1>
-<%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
-    <table>
-        <tr>
-            <th>氏名</th>
-            <th><%= f.text_field :last_name %></th>
-            <th><%= f.text_field :first_name %></th>
-        </tr>
-        <tr>
-            <th>フリカナ</th>
-            <th><%= f.text_field :last_name_kana %></th>
-            <th><%= f.text_field :first_name_kana %></th>
-        </tr>
-        <tr>
-            <th>郵便番号</th>
-            <th><%= f.text_field :postal_code %></th>
-        </tr>
-        <tr>
-            <th>住所</th>
-            <th><%= f.text_field :address %></th>
-        </tr>
-        <tr>
-            <th>電話番号</th>
-            <th><%= f.text_field :telephone_number %></th>
-        </tr>
-        <tr>
-            <th>メールアドレス</th>
-            <th><%= f.text_field :email %></th>
-        </tr>
-        <tr>
-            <th>会員ステータス</th>
-            <th>
-                <%= f.radio_button :is_active, true %>
-                <%= f.label :is_active, "有効" %>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p><%= @customer.full_name %>さんの会員情報編集</p>
+        </div>
+    </div>
+    <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
+        <div class="row">
+            <table class="table table-borderless">
+                <tr>
+                    <th class="col-2">氏名</th>
+                    <td class="col"><%= f.text_field :last_name %>  <%= f.text_field :first_name %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">フリカナ</th>
+                    <td class="col"><%= f.text_field :last_name_kana %>  <%= f.text_field :first_name_kana %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">郵便番号</th>
+                    <td class="col">  <%= f.text_field :postal_code %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">住所</th>
+                    <td class="col"><%= f.text_field :address, size: "50x20" %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">電話番号</th>
+                    <td class="col"><%= f.text_field :telephone_number %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">メールアドレス</th>
+                    <td class="col"><%= f.text_field :email %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">会員ステータス</th>
+                    <td class="col">
+                        <%= f.radio_button :is_active, true %>
+                        <%= f.label :is_active, "有効" %>
+        
+                        <%= f.radio_button :is_active, false %>
+                        <%= f.label :is_active, "無効" %>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="col-2"></th>
+                    <td class="col"><%= f.submit "変更を保存", class: "btn btn-success" %></td>
+                </tr>
+            </table>
+        </div>
+    <% end %>
+</div>
 
-                <%= f.radio_button :is_active, false %>
-                <%= f.label :is_active, "無効" %>
-            </th>
-        </tr>
-        <tr>
-            <th></th>
-            <th><%= f.submit "変更を保存", class: "btn btn-success" %></th>
-        </tr>
-
-<% end %>
