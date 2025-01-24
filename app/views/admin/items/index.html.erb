@@ -1,6 +1,11 @@
 <div class="container">
-  <div class="row">
-    <h1 class="mb-3">商品一覧</h1>
+  <div class="row mt-3 mb-3">
+    <h2 class="col">商品一覧</h2>
+    <div class="col d-flex justify-content-end">
+      <%= link_to new_admin_item_path do %>
+        <h3 class="btn btn-primary">新商品追加</h3>
+      <% end %>
+    </div>
   </div>
 
   <div class="row">
@@ -41,4 +46,7 @@
       </tbody>
     </table>
   </div>
+  <div class="d-flex justify-content-center">
+      <%= paginate @items, theme: 'bootstrap-5' %>
+    </div>
 </div>

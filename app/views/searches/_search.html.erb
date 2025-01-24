@@ -1,7 +1,7 @@
 <div class="search_form">
     <%= form_with url: searches_search_path, method: :get do |f| %>
-        <%= f.text_field :word %>
-        <%= f.submit "search" %>
+        <%= f.text_field :word, placeholder:"Search",class:"mr-2" %>
+        <%= f.submit "Search", class:"btn btn-outline-secondary btn-sm" %>
     <% end %>
 <div>
 
