@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand" href="/"><%= image_tag('logo.jpg', size: "100x100") %></a>
+    <a class="navbar-brand" href="/"><%= image_tag('bignaganocake.jpg', size: "80x80") %></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2">
         <% if admin_signed_in? %>
@@ -39,33 +40,46 @@
           <% end %>
         <% elsif customer_signed_in? %>
           <li class="nav-item">
+
             <%= link_to 'マイぺージ', my_page_path, class: 'btn btn-outline-dark' %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to '商品一覧', items_path, class: 'btn btn-outline-dark' %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to 'カート', cart_items_path, class: 'btn btn-outline-dark' %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'btn btn-outline-dark' %>
           </li>
+
         <% else %>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to 'About', about_path, class: 'btn btn-outline-dark' %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to '商品一覧', items_path, class: 'btn btn-outline-dark' %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-outline-dark' %>
           </li>
-          <li class="nav-item">
+          <li class="nav-item mr-3">
             <%= link_to 'ログイン', new_customer_session_path, class: 'btn btn-outline-dark' %>
           </li>
         <% end %>
       </ul>
-      <%= render "searches/search" %>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+  <div class="container">
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarsub">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= render "searches/search" %>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
