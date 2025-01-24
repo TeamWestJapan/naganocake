@@ -1,12 +1,13 @@
 <div class="container">
+    </br>
     <div class="row">
         <div class="col-1">
         </div>
         <div class="col-3">
-            <p>配送先登録/一覧</p>
+            <h2>配送先登録/一覧</h2>
         </div>
     </div>
-
+    </br>
     <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
             <div class="row">
                 <table class="table table-borderless">
@@ -17,7 +18,7 @@
                     </tr>
                     <tr>
                         <th class="col-3"><%= f.label :address, "住所" %></th>
-                        <td class="col-7"><%= f.text_field :address %></td>
+                        <td class="col-7"><%= f.text_field :address, size: "50x20" %></td>
                         <td class="col-2"></td>
                     </tr>
                     <tr>

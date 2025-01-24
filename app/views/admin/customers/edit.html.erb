@@ -1,9 +1,11 @@
 <div class="container">
+    </br>
     <div class="row">
         <div class="col">
-            <p><%= @customer.full_name %>さんの会員情報編集</p>
+            <h2><%= @customer.full_name %>さんの会員情報編集</h2>
         </div>
     </div>
+    </br>
     <%= form_with model: @customer, url: admin_customer_path(@customer), method: :patch do |f| %>
         <div class="row">
             <table class="table table-borderless">

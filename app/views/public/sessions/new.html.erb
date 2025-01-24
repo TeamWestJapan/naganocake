@@ -1,9 +1,11 @@
 <div class="container">
+  </br>
   <div class="row">
     <div class="col">
-      <p>ログイン</p>
+      <h4>ログイン</h4>
     </div>
   </div>
+  </br>
   <div class="row">
     <div class="col">
       <p>会員の方はこちらからログイン</p>
@@ -18,7 +20,7 @@
         <%= f.label :email, "メールアドレス" %>
       </div>
       <div class="col">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", size: "50x20" %>
       </div>
     </div>
     </br>
@@ -29,7 +31,7 @@
         <%= f.label :password, "パスワード" %>
       </div>
       <div class="col">
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", size: "50x20" %>
       </div>
     </div>
     </br>
@@ -37,10 +39,23 @@
       <div class="col-3">
       </div>
       <div class="col">
-        <%= f.submit "ログイン" %>
+        <%= f.submit "ログイン", class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>
+
+  <div class="row">
+    <div class="col">
+      <p>会員登録がお済みでない方</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col">
+      <%= render "public/shared/links" %>から新規登録を行なってください。
+    </div>
+  </div>
 </div>
-<p>会員登録がお済みでない方</p>
-<%= render "public/shared/links" %>から新規登録を行なってください。
+
+

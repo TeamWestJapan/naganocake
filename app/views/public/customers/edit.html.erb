@@ -1,10 +1,11 @@
 <div class="container">
+    </br>
     <div class="row">
         <div class="col-3">
-            <p>会員情報編集</p>
+            <h2>会員情報編集</h2>
         </div>
     </div>
-    
+    </br>
     <%= form_with model: @customer, url: info_update_path, method: :patch do |f| %>
         <div class="row">
             <table class="table table-borderless">
@@ -48,7 +49,7 @@
             </div>
             
             <div class="col">
-                <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %></td>
+                <%= link_to "退会する", unsubscribe_path, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %></td>
             </div>
         </div>
     <% end %>
