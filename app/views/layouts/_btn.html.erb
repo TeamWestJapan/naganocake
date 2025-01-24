@@ -5,42 +5,41 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2">
         <% if admin_signed_in? %>
           <% if request.fullpath.include? "/admin" %>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to '商品一覧', admin_items_path, class: 'btn btn-outline-dark' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to '会員一覧', admin_customers_path, class: 'btn btn-outline-dark' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to '注文履歴一覧', admin_path, class: 'btn btn-outline-dark' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to 'ジャンル一覧', admin_genres_path, class: 'btn btn-outline-dark' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-dark' %>
             </li>
           <% else %>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to 'マイぺージ', my_page_path, class: 'btn btn-outline-dark' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to '商品一覧', items_path, class: 'btn btn-outline-dark' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to 'カート', cart_items_path, class: 'btn btn-outline-dark' %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
               <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'btn btn-outline-dark' %>
             </li>
           <% end %>
         <% elsif customer_signed_in? %>
-          <li class="nav-item">
-
+          <li class="nav-item mr-3">
             <%= link_to 'マイぺージ', my_page_path, class: 'btn btn-outline-dark' %>
           </li>
           <li class="nav-item mr-3">
