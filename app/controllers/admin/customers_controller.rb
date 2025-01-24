@@ -1,4 +1,6 @@
 class Admin::CustomersController < ApplicationController
+  before_action :authenticate_admin!, only: [:index, :show, :edit, :update]
+
   def index
     @customers = Customer.page(params[:page]).per(10)
   end
