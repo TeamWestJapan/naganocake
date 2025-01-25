@@ -9,6 +9,9 @@
       <ul class="navbar-nav mb-2">
         <% if admin_signed_in? %>
           <% if request.fullpath.include? "/admin" %>
+            <li class="nav-item mr-5 border-bottom">
+              「管理者ログイン中」
+            </li>
             <li class="nav-item mr-3">
               <%= link_to '商品一覧', admin_items_path, class: 'btn btn-outline-dark' %>
             </li>
@@ -39,6 +42,9 @@
             </li>
           <% end %>
         <% elsif customer_signed_in? %>
+            <li class="nav-item mr-5 border-bottom">
+            ようこそ <%= current_customer.last_name %>様！
+            </li>
           <li class="nav-item mr-3">
             <%= link_to 'マイぺージ', my_page_path, class: 'btn btn-outline-dark' %>
           </li>
