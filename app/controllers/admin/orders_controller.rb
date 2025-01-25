@@ -19,6 +19,8 @@ class Admin::OrdersController < ApplicationController
         @order.update(status: "preparing_for_shipping")
       end
     end
+    @order.update(order_params)
+    
     redirect_to request.referer
   end
     
