@@ -1,0 +1,44 @@
+<div class="container">
+    </br>
+    <div class="row">
+        <div class="col-2">
+            <h2>会員一覧</h2>
+        </div>
+        <div class="col-10">
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <table class="table table-border">
+            <thead class="table-secondary">
+                <tr>
+                    <th class="col-1">会員ID</th>
+                    <th class="col-3">氏名</th>
+                    <th class="col-4">メールアドレス</th>
+                    <th class="col-4">ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @customers.each do |customer| %>
+                    <tr>
+                        <td class="col-1"><%= customer.id %></td>
+                        <td class="col-3">
+                            <%= link_to admin_customer_path(customer) do %>
+                                <%= customer.full_name %>
+                            <% end %>
+                        </td>
+                        <td class="col-4"><%= customer.email %></td>
+                        <td class="col-4">
+                            <% if customer.is_active == true %>
+                                <strong class="text-success">有効</strong>
+                            <% else %>
+                                <strong class="text-secondary">無効</strong>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= paginate @customers, theme: 'bootstrap-5'%>
+    </div>
+</div>

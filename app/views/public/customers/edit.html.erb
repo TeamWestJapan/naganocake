@@ -1,0 +1,57 @@
+<div class="container">
+    </br>
+    <div class="row">
+        <div class="col-3">
+            <h2>会員情報編集</h2>
+        </div>
+    </div>
+    </br>
+    <%= form_with model: @customer, url: info_update_path, method: :patch do |f| %>
+        <div class="row">
+            <table class="table table-borderless">
+                <tr>
+                    <th class="col-2">氏名</th>
+                    <td class="col-3"><%= f.text_field :last_name %></td>
+                    <td class="col-3"><%= f.text_field :first_name %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">カナ</th>
+                    <td class="col-3"><%= f.text_field :last_name_kana %></td>
+                    <td class="col-3"><%= f.text_field :first_name_kana %></td>
+                </tr>
+                <tr>
+                    <th class="col-2">郵便番号</th>
+                    <td class="col-3"><%= f.text_field :postal_code %></td>
+                    <td class="col-7"></td>
+                </tr>
+                <tr>
+                    <th class="col-2">住所</th>
+                    <td class="col-3"><%= f.text_field :address %></td>
+                    <td class="col-7"></td>
+                </tr>
+                <tr>
+                    <th class="col-2">電話番号</th>
+                    <td class="col-3"><%= f.text_field :telephone_number %></td>
+                    <td class="col-7"></td>
+                </tr>
+                <tr>
+                    <th class="col-2">メールアドレス</th>
+                    <td class="col-3"><%= f.text_field :email %></td>
+                    <td class="col-7"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+                <%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
+            </div>
+            
+            <div class="col">
+                <%= link_to "退会する", unsubscribe_path, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %></td>
+            </div>
+        </div>
+    <% end %>
+</div>
+

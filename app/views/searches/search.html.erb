@@ -1,0 +1,43 @@
+<div class="container">
+    </br>
+    <div class="row">
+        <div class="col">
+            <h2>商品検索結果</h2>
+        </div>
+    </div>
+    </br>
+    <div class="row">        
+        <table class="table table-border">
+            <thead>
+                <tr>
+                    <th class="col-2">ジャンル名</th>
+                    <th class="col-2">商品名</th>
+                    <th class="col-3">商品説明</th>
+                    <th class="col-2">税抜価格</th>
+                    <th class="col">販売ステータス</th>
+                </tr>
+            </thead>
+            <% @items.each do |item| %>
+                <tbody>
+                    <tr>
+                        <td class="col-2"><%= item.genre.name %></td>
+                        <td class="col-2">
+                            <%= link_to item_path(item) do %>
+                                <%= item.name %>
+                            <% end %>
+                        </td>
+                        <td class="col-3"><%= item.introduction %></td>
+                        <td class="col-2"><%= item.price %></th>
+                        <td class="col">
+                            <% if item.is_active == true %>
+                                <p class="text-success">販売中</p>
+                            <% else %>
+                                <p lass="text-secondary">販売停止</p>
+                            <% end %>
+                        </td>
+                    </tr>
+                </tbody>
+            <% end %>
+        </table>
+    </div>
+</div>

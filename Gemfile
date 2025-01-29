@@ -56,3 +56,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+
+gem "enum_help"
+
+gem 'kaminari'
+
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
